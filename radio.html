@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset=utf-8>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no"/>
+    <meta name="author" content="Pavel Ratushnyi"/>
+    <link href='http://fonts.googleapis.com/css?family=Audiowide' rel='stylesheet' type='text/css'>
+    <title>Simple HTML5 radio player concept</title>
+    <style>
+        span.active {
+            color: white;
+            background-color: yellowgreen;
+            border-radius: 8pt;
+        }
+
+        span.list {
+            cursor: pointer;
+            font-family: 'Audiowide', cursive;
+            font-size: 14pt;
+            text-align: center;
+            display: block;
+            margin-bottom: 10px;
+            padding: 15px;
+        }
+    </style>
+</head>
+<body>
+<audio id="radio" autoplay="false" type="audio/mpeg">Обновите браузер</audio>
+<div id="radiolist"></div>
+<script>
+    var radiolist = [
+        { "label": "Lux FM", "src": "http://icecast.luxnet.ua/lux", "type": "audio/aac"},
+        { "label": "Radio ROKS", "src": "http://online-radioroks.tavrmedia.ua/RadioROKS", "type": "audio/mpeg" },
+        { "label": "Europa plus [ua]", "src": "http://cast.europaplus.ua/europaplus", "type": "audio/mpeg" },
+        { "label": "Hit FM [ua]", "src": "http://online-hitfm.tavrmedia.ua/HitFM", "type": "audio/mpeg" },
+        { "label": "Kiss FM", "src": "http://stream.kissfm.ua/kiss", "type": "audio/mpeg" },
+        { "label": "Kiss FM Deep", "src": "http://stream.kissfm.ua/KissFM_deep", "type": "audio/mpeg" },
+        { "label": "Kiss FM Digital", "src": "http://stream.kissfm.ua/KissFM_digital", "type": "audio/mpeg" },
+        { "label": "Kiss FM Trance", "src": "http://stream.kissfm.ua/KissFM_trance", "type": "audio/mpeg" },
+        { "label": "Radio Relax", "src": "http://online-radiorelax.tavrmedia.ua/RadioRelax", "type": "audio/mpeg" },
+        { "label": "Europa plus [ru]", "src": "http://ep2561.streamr.ru:8052/europaplus256.mp3", "type": "audio/mpeg" },
+        { "label": "Europa plus [ru] Dance", "src": "http://epdance128server.streamr.ru:8035/epdance128", "type": "audio/mpeg" },
+        { "label": "Europa plus [ru] TOP40", "src": "http://eptop128server.streamr.ru:8033/eptop128", "type": "audio/mpeg" },
+        { "label": "Europa plus [ru] Fresh", "src": "http://epfresh128server.streamr.ru:8034/epfresh128", "type": "audio/mpeg" },
+        { "label": "Europa plus [ru] R&B", "src": "http://eprnb128server.streamr.ru:8061/eprnb128", "type": "audio/mpeg" },
+        { "label": "Europa plus [ru] PopRock", "src": "http://eprock128server.streamr.ru:8062/eprock128", "type": "audio/mpeg" },
+        { "label": "Off", "src": "", "type": "audio.mpeg" }
+    ];
+    (function () {
+        radiolist.forEach(function (e) {
+            var el = document.createElement('span');
+            el.setAttribute('class', 'list');
+            el.setAttribute('val', e.src);
+            el.setAttribute('onclick', '(function(){ var radio = document.getElementById(\'radio\'); radio.setAttribute(\'type\',\'' + e.type + '\'); radio.setAttribute(\'src\',\'' + e.src + '\'); radio.pause(); radio.play(); l = document.getElementsByClassName(\'list\'); for (var i = 0; i < l.length; i ++) { l[i].className = \'list\' + (l[i].getAttribute(\'val\') == \'' + e.src + '\' ? \' active\': \'\'); }  })();');
+            if (document.all) {
+                el.innerText = e.label;
+            } else {
+                el.textContent = e.label;
+            }
+            document.getElementById('radiolist').appendChild(el);
+        });
+    })();
+</script>
+</body>
+</html>
